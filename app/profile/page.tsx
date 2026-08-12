@@ -61,9 +61,21 @@ export default function ProfilePage() {
                     className="object-cover"
                   />
                 </div>
+
+                {/* Photo Credit */}
+                <p
+                  className="
+                    mt-3
+                    text-center
+                    text-xs
+                    text-neutral-400
+                  "
+                >
+                  Photo by Ayane Shindo
+                </p>
       
               </div>
-      
+                    
               {/* Right */}
       
               <div className="leading-8 text-neutral-700">
