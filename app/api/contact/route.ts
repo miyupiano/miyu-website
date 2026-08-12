@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // -----------------------------
 
     await resend.emails.send({
-      from: "Miyu Yukiiri Website <onboarding@resend.dev>",
+      from: "雪入美優 <contact@miyuyukiiri.com>",
 
       to: "klaviermyun@gmail.com",
 
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     // -----------------------------
 
     const autoReplyResult = await resend.emails.send({
-      from: "Miyu Yukiiri Website <onboarding@resend.dev>",
+      from: "雪入美優 <contact@miyuyukiiri.com>",
 
       to: body.email,
 
