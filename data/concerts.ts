@@ -94,6 +94,19 @@ export const pastConcerts = {
         "/images/performance/archive/2026/photos/4-1.jpg",
     },
 
+    {
+      id: 5,
+      title: "ベートーヴェン・ピアノ・チクルス 傑作の森Vol.4",
+      flyer:
+        "/images/performance/archive/2026/flyer-5.jpg",
+      date: "2026.08.28",
+      venue: "竹風堂善光寺大門店３階大門ホール",
+      program: "ベートーヴェン:ソナタ第17番「テンペスト」、ソナタ第18番",
+      comment:
+        "",
+      image:
+        "/images/performance/archive/2026/photos/5-1.jpg",
+    },
   ],
 
 

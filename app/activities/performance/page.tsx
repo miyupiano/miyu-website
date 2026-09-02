@@ -1,107 +1,83 @@
-// import Image from "next/image";
-// import Button from "@/components/common/Button";
-
-// export default function PerformanceRequestPage() {
-//   return (
-//     <main>
-
-//       <section className="relative h-[55vh]">
-
-//         <Image
-//           src="/images/activities/performance/hero.jpg"
-//           alt="演奏依頼"
-//           fill
-//           className="object-cover"
-//         />
-
-//         <div className="absolute inset-0 bg-black/35" />
-
-
-//         <div className="absolute inset-0 flex items-center justify-center">
-
-//           <h1 className="text-6xl font-extralight tracking-[0.15em] text-white">
-//             演奏依頼
-//           </h1>
-
-//         </div>
-
-//       </section>
-
-
-
-//       <section className="mx-auto max-w-4xl px-8 pt-26">
-
-//         <h2 className="mb-10 text-4xl font-extralight">
-//           心に残る音楽の時間を
-//         </h2>
-
-
-//         <p className="leading-9 text-neutral-700">
-
-//           コンサート、イベント、学校、施設など、
-//           様々な場での演奏依頼を承っています。
-
-//           <br /><br />
-
-//           空間や目的に合わせたプログラムをご提案し、
-//           音楽を通した時間をお届けします。
-
-//         </p>
-
-//       </section>
-
-
-
-//       <section className="mx-auto max-w-5xl px-8 pb-28">
-
-//         <h2 className="mb-8 text-3xl font-light">
-//           対応例
-//         </h2>
-
-
-//         <ul className="space-y-4 leading-8 text-neutral-700">
-
-//           <li>
-//             ・ホールコンサート
-//           </li>
-
-//           <li>
-//             ・学校、教育施設での演奏
-//           </li>
-
-//           <li>
-//             ・イベントや記念日の演奏
-//           </li>
-
-//         </ul>
-
-//       </section>
-
-
-
-//       <section className="pb-28 text-center">
-
-//         <Button
-//           href="/contact/performance"
-//           className=""
-//         >
-//           演奏依頼について問い合わせる
-//         </Button>
-
-//       </section>
-
-
-//     </main>
-//   );
-// }
-
-
 import Image from "next/image";
+
+const services = [
+  {
+    title: "ピアノリサイタル（クラシック）",
+    description:
+      "ホールやサロンなどで約1〜2時間のクラシック・ピアノリサイタルを行います。ご希望のテーマや会場の雰囲気に合わせて、プログラムのご提案も可能です。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "ピアノコンチェルト",
+    description:
+      "オーケストラとの共演によるピアノ協奏曲の演奏を承ります。十分な準備期間が必要となるため、半年以上前を目安にご相談ください。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "クラシック演奏（ゲスト出演等）",
+    description:
+      "演奏会や式典などで、1曲から数曲程度の演奏を承ります。演奏時間や催しの趣旨に合わせてプログラムをご提案いたします。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "ホテル・レストランでのBGM演奏",
+    description:
+      "クラシックからポップスまで、空間に寄り添うBGM演奏を行います。会場や時間帯に合わせた選曲もお任せください。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "結婚式・イベント演奏",
+    description:
+      "結婚式やクリスマス、お正月など、さまざまなイベントでの演奏を承ります。ご希望の楽曲の演奏はもちろん、選曲のご相談も可能です。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "病院・高齢者施設での演奏",
+    description:
+      "クラシックに加え、昭和歌曲や童謡など親しみやすい楽曲も交えながら、約30分程度のコンサートを行います。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "学校公演・レクチャーコンサート",
+    description:
+      "学校公演や芸術鑑賞会などに対応しております。テーマに合わせた演奏とトークを交え、音楽の魅力を分かりやすくお届けします。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "新作ピアノ作品の初演",
+    description:
+      "作曲家の皆様からの新作ピアノ作品の初演依頼も歓迎しております。作品について相談しながら、一つひとつ丁寧に演奏へと形にしてまいります。",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+  {
+    title: "ワークショップ",
+    description:
+      "お絵描き",
+    achievements: [
+      "今後追加予定",
+    ],
+  },
+];
 
 export default function PerformanceRequestPage() {
   return (
     <main>
-
 
       {/* Hero */}
 
@@ -116,7 +92,6 @@ export default function PerformanceRequestPage() {
 
         <div className="absolute inset-0 bg-black/40" />
 
-
         <div className="absolute inset-0 flex items-center justify-center px-8">
 
           <div className="text-center text-white">
@@ -125,13 +100,10 @@ export default function PerformanceRequestPage() {
               演奏依頼
             </h1>
 
-
             <p className="mt-8 leading-8">
-
-              心に残る音楽の時間を届けるため、
+              心に残る音楽の時間を、
               <br />
-              演奏依頼ページを準備しています。
-
+              一つひとつ丁寧にお届けします。
             </p>
 
           </div>
@@ -142,31 +114,150 @@ export default function PerformanceRequestPage() {
 
 
 
+      {/* Availability */}
 
-      {/* Coming Soon */}
-
-      <section className="mx-auto max-w-4xl px-8 py-28 text-center">
-
+      <section className="mx-auto max-w-5xl px-8 py-28">
 
         <h2 className="text-4xl font-extralight">
-          Coming Soon
+          対応期間・活動拠点
         </h2>
 
+        <div className="mt-12 space-y-6 leading-9 text-neutral-700">
 
+          <p>
+            現在、ベルギー・ブリュッセルを拠点としております。
+          </p>
 
-        <p className="mt-10 leading-9 text-neutral-600">
+          <p>
+            日本での演奏は、一時帰国期間を中心に承っております。
+          </p>
 
-          演奏依頼ページは現在準備中です。
+          <div className="rounded-2xl bg-neutral-50 p-8">
 
-          <br /><br />
+            <p>
+              <strong>冬：</strong>12月21日頃〜12月30日頃
+            </p>
 
-          詳細ページを近日公開予定です。
+            <p className="mt-3">
+              <strong>夏：</strong>7月〜8月頃
+            </p>
 
-        </p>
+          </div>
 
+          <p>
+            上記以外の期間につきましては、ヨーロッパでの演奏依頼を承っております。
+          </p>
+
+          <p>
+            日本では東京・長野を中心に活動しておりますが、
+            その他の地域につきましてもお気軽にご相談ください。
+          </p>
+
+          <p>
+            演奏内容や日程、演奏料、交通費など、
+            ご依頼内容に応じてご案内いたします。
+            まずはお気軽にお問い合わせください。
+          </p>
+
+        </div>
 
       </section>
 
+
+
+            {/* Services */}
+
+      <section className="mx-auto max-w-7xl px-8 pb-28">
+
+        <h2 className="text-4xl font-extralight">
+          お受けしている演奏内容
+        </h2>
+
+        <div
+          className="
+            mt-16
+            grid
+            gap-8
+            md:grid-cols-2
+            xl:grid-cols-3
+          "
+        >
+
+          {services.map((service) => (
+
+            <div
+              key={service.title}
+              className="
+                flex
+                h-full
+                flex-col
+                rounded-2xl
+                border
+                border-neutral-200
+                bg-white
+                p-8
+              "
+            >
+
+              <h3 className="text-xl font-light leading-8">
+                {service.title}
+              </h3>
+
+              <p
+                className="
+                  mt-5
+                  leading-8
+                  text-neutral-700
+                "
+              >
+                {service.description}
+              </p>
+
+              <div className="mt-auto pt-8">
+
+                <div className="border-t border-neutral-200 pt-6">
+
+                  <p
+                    className="
+                      text-xs
+                      tracking-[0.15em]
+                      text-neutral-400
+                    "
+                  >
+                    主な実績
+                  </p>
+
+                  <ul
+                    className="
+                      mt-3
+                      space-y-2
+                      text-sm
+                      leading-7
+                      text-neutral-600
+                    "
+                  >
+
+                    {service.achievements.map((achievement) => (
+
+                      <li key={achievement}>
+                        ・{achievement}
+                      </li>
+
+                    ))}
+
+                  </ul>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
 
     </main>
   );

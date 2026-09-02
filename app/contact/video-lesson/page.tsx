@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { sendContact } from "@/lib/contact/sendContact";
 
-
 type FormData = {
   name: string;
   email: string;
@@ -14,9 +13,7 @@ type FormData = {
   message: string;
 };
 
-
 export default function VideoLessonContactPage() {
-
   const [step, setStep] = useState<
     "form" | "confirm" | "complete"
   >("form");
@@ -33,45 +30,35 @@ export default function VideoLessonContactPage() {
     message: "",
   });
 
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-
-
   const updateField = (
     field: keyof FormData,
     value: string
   ) => {
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [field]: value,
-    });
+    }));
   };
 
-
-
   const validateForm = () => {
-
     const newErrors = {
       name: "",
       email: "",
       message: "",
     };
 
-
     if (!formData.name.trim()) {
-      newErrors.name =
-        "お名前を入力してください";
+      newErrors.name = "お名前を入力してください";
     }
 
-
     if (!formData.email.trim()) {
-      newErrors.email =
-        "メールアドレスを入力してください";
+      newErrors.email = "メールアドレスを入力してください";
     } else if (
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
     ) {
@@ -79,15 +66,12 @@ export default function VideoLessonContactPage() {
         "メールアドレスの形式をご確認ください";
     }
 
-
     if (!formData.message.trim()) {
       newErrors.message =
         "お問い合わせ内容を入力してください";
     }
 
-
     setErrors(newErrors);
-
 
     return (
       !newErrors.name &&
@@ -96,44 +80,45 @@ export default function VideoLessonContactPage() {
     );
   };
 
+  const handleConfirm = () => {
+    if (validateForm()) {
+      setStep("confirm");
+    }
+  };
+
   const sendMail = async () => {
     setIsSending(true);
 
     try {
       await sendContact(formData);
       setStep("complete");
-
     } catch (error) {
-      alert("送信に失敗しました。");
       console.error(error);
-
+      alert("送信に失敗しました。");
     } finally {
       setIsSending(false);
     }
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-8 py-28">
-
-
-      <h1 className="mb-6 text-5xl font-extralight">
+    <main className="mx-auto max-w-3xl px-8 pt-28 pb-20">
+      <h1 className="mb-6 text-4xl font-extralight">
         動画添削レッスンについて
       </h1>
 
-
       <p className="mb-12 leading-9 text-neutral-700">
-        演奏動画をもとにした添削レッスンについてのお問い合わせはこちらからお願いいたします。
+        演奏動画をもとにした添削レッスンについての
+        お問い合わせはこちらからお願いいたします。
       </p>
 
-
-
+      {/* =========================
+          入力画面
+      ========================= */}
       {step === "form" && (
-
         <div className="space-y-8">
 
-
+          {/* お名前 */}
           <div>
-
             <label className="mb-2 block text-sm">
               お名前
             </label>
@@ -151,13 +136,10 @@ export default function VideoLessonContactPage() {
                 {errors.name}
               </p>
             )}
-
           </div>
 
-
-
+          {/* メールアドレス */}
           <div>
-
             <label className="mb-2 block text-sm">
               メールアドレス
             </label>
@@ -176,13 +158,10 @@ export default function VideoLessonContactPage() {
                 {errors.email}
               </p>
             )}
-
           </div>
 
-
-
+          {/* 年齢 */}
           <div>
-
             <label className="mb-2 block text-sm">
               年齢
             </label>
@@ -192,15 +171,13 @@ export default function VideoLessonContactPage() {
               onChange={(e) =>
                 updateField("age", e.target.value)
               }
-              className="w-full rounded-lg border border-neutral-300 p-4"
+              placeholder="例：15歳"
+              className="w-full rounded-lg border border-neutral-300 p-4 outline-none focus:border-black"
             />
-
           </div>
 
-
-
+          {/* ピアノ経験 */}
           <div>
-
             <label className="mb-2 block text-sm">
               ピアノ経験
             </label>
@@ -213,19 +190,16 @@ export default function VideoLessonContactPage() {
                   e.target.value
                 )
               }
-              className="w-full rounded-lg border border-neutral-300 p-4"
+              className="w-full rounded-lg border border-neutral-300 p-4 outline-none focus:border-black"
             >
               <option>未経験</option>
               <option>初心者</option>
               <option>経験あり</option>
             </select>
-
           </div>
 
-
-
+          {/* 添削希望曲 */}
           <div>
-
             <label className="mb-2 block text-sm">
               添削希望曲
             </label>
@@ -236,15 +210,12 @@ export default function VideoLessonContactPage() {
                 updateField("song", e.target.value)
               }
               placeholder="例：ショパン バラード第1番"
-              className="w-full rounded-lg border border-neutral-300 p-4"
+              className="w-full rounded-lg border border-neutral-300 p-4 outline-none focus:border-black"
             />
-
           </div>
 
-
-
+          {/* 演奏動画について */}
           <div>
-
             <label className="mb-2 block text-sm">
               演奏動画について
             </label>
@@ -255,16 +226,13 @@ export default function VideoLessonContactPage() {
               onChange={(e) =>
                 updateField("video", e.target.value)
               }
-              placeholder="動画の長さや提出方法など"
-              className="w-full rounded-lg border border-neutral-300 p-4"
+              placeholder="動画の長さや提出方法など、分かる範囲でご記入ください"
+              className="w-full rounded-lg border border-neutral-300 p-4 outline-none focus:border-black"
             />
-
           </div>
 
-
-
+          {/* お問い合わせ内容 */}
           <div>
-
             <label className="mb-2 block text-sm">
               お問い合わせ内容
             </label>
@@ -273,12 +241,9 @@ export default function VideoLessonContactPage() {
               rows={8}
               value={formData.message}
               onChange={(e) =>
-                updateField(
-                  "message",
-                  e.target.value
-                )
+                updateField("message", e.target.value)
               }
-              className="w-full rounded-lg border border-neutral-300 p-4"
+              className="w-full rounded-lg border border-neutral-300 p-4 outline-none focus:border-black"
             />
 
             {errors.message && (
@@ -286,124 +251,93 @@ export default function VideoLessonContactPage() {
                 {errors.message}
               </p>
             )}
-
           </div>
 
-
-
+          {/* 確認ボタン */}
           <button
-            onClick={() => {
-              if (validateForm()) {
-                setStep("confirm");
-              }
-            }}
+            type="button"
+            onClick={handleConfirm}
             className="mx-auto block cursor-pointer rounded-full border border-black px-8 py-4 transition hover:bg-black hover:text-white"
           >
             確認する
           </button>
-
-
         </div>
-
       )}
 
-
-
+      {/* =========================
+          確認画面
+      ========================= */}
       {step === "confirm" && (
-
         <div>
-
           <h2 className="text-2xl font-light">
             内容確認
           </h2>
 
-
           <div className="mt-10 space-y-5 leading-8">
-
             <p>
-              お名前：
-              {formData.name}
+              お名前：{formData.name}
             </p>
 
             <p>
-              メール：
-              {formData.email}
+              メール：{formData.email}
             </p>
 
             <p>
-              年齢：
-              {formData.age}
+              年齢：{formData.age || "未記入"}
             </p>
 
             <p>
-              経験：
-              {formData.experience}
+              経験：{formData.experience}
             </p>
 
             <p>
-              曲目：
-              {formData.song}
+              曲目：{formData.song || "未記入"}
             </p>
 
-            <p>
-              動画：
-              {formData.video}
+            <p className="whitespace-pre-wrap">
+              動画：{formData.video || "未記入"}
             </p>
 
-            <p>
-              内容：
-              {formData.message}
+            <p className="whitespace-pre-wrap">
+              内容：{formData.message}
             </p>
-
           </div>
 
-
-
           <div className="mt-10 flex justify-center gap-4">
-
             <button
+              type="button"
               onClick={() => setStep("form")}
               className="cursor-pointer rounded-full border border-neutral-300 px-8 py-4 text-neutral-600 transition hover:bg-neutral-100"
             >
               戻る
             </button>
 
-
             <button
+              type="button"
               onClick={sendMail}
               disabled={isSending}
               className="cursor-pointer rounded-full bg-black px-8 py-4 text-white transition hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSending ? "送信中..." : "送信する"}
             </button>
-
           </div>
-
-
         </div>
-
       )}
 
-
-
+      {/* =========================
+          完了画面
+      ========================= */}
       {step === "complete" && (
-
         <div className="py-10">
-
           <h2 className="text-2xl font-light">
             お問い合わせありがとうございます
           </h2>
 
-
           <p className="mt-6 leading-8 text-neutral-600">
             内容を確認の上、改めてご連絡いたします。
           </p>
-
         </div>
-
       )}
-
-
     </main>
   );
 }

@@ -9,7 +9,7 @@ import ConcertApplyModal from "./ConcertApplyModal";
 
 
 export default function UpcomingConcerts() {
-
+  const SHOW_UPCOMING_CONCERTS = false;
   const galleryRef =
     useRef<HTMLDivElement>(null);
 
@@ -130,6 +130,25 @@ export default function UpcomingConcerts() {
     });
 
   };
+
+  if (!SHOW_UPCOMING_CONCERTS) {
+    return (
+      <section className="mx-auto max-w-6xl px-8 pt-12 md:pt-26">
+
+        <SectionTitle
+          title="今後の演奏会"
+          subtitle=""
+        />
+
+        <p className="mt-10 text-center leading-8 text-neutral-600">
+          現在ご案内中の演奏会はございません。
+          <br />
+          新しい演奏会が決まり次第、お知らせいたします。
+        </p>
+
+      </section>
+    );
+  }
 
   return (
   <section className="mx-auto max-w-6xl px-8 pt-12 md:pt-26">

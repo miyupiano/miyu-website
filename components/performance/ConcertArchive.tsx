@@ -17,36 +17,26 @@ export default function ConcertArchive() {
     (typeof pastConcerts)[keyof typeof pastConcerts][number] | null
   >(null);
 
-
   const galleryRef = useRef<HTMLDivElement>(null);
-
 
   const [leftFadeOpacity, setLeftFadeOpacity] = useState(0);
   const [rightFadeOpacity, setRightFadeOpacity] = useState(1);
 
-
-
   const updateFade = () => {
-
     const element = galleryRef.current;
 
     if (!element) return;
 
-
     const maxScroll =
       element.scrollWidth - element.clientWidth;
 
-
     const scrollLeft = element.scrollLeft;
 
-
     const fadeDistance = 100;
-
 
     setLeftFadeOpacity(
       Math.min(scrollLeft / fadeDistance, 1)
     );
-
 
     setRightFadeOpacity(
       Math.min(
@@ -54,15 +44,10 @@ export default function ConcertArchive() {
         1
       )
     );
-
   };
 
-
-
   useEffect(() => {
-
     requestAnimationFrame(() => {
-
       const element = galleryRef.current;
 
       if (element) {
@@ -70,21 +55,14 @@ export default function ConcertArchive() {
       }
 
       updateFade();
-
     });
-
   }, [selectedYear]);
-
-
 
   const concerts =
     pastConcerts[selectedYear as keyof typeof pastConcerts];
 
-
-
   return (
     <section className="mx-auto max-w-6xl px-8 pt-26 pb-20">
-
 
       <SectionTitle
         title="演奏会アーカイブ"
@@ -136,13 +114,9 @@ export default function ConcertArchive() {
 
       </div>
 
-
-
-
       {/* Gallery */}
 
       <div className="relative">
-
 
         <div
           ref={galleryRef}
@@ -164,17 +138,19 @@ export default function ConcertArchive() {
               onClick={() => setSelectedConcert(concert)}
               className="
                 group
+                flex
                 min-w-[250px]
+                flex-col
                 cursor-pointer
                 text-left
               "
             >
 
-
               <div
                 className="
                   relative
                   aspect-[3/4]
+                  flex-shrink-0
                   transition
                   duration-300
                   group-hover:-translate-y-2
@@ -196,22 +172,23 @@ export default function ConcertArchive() {
 
               </div>
 
-
-
-              <p className="mt-5 text-sm text-center">
+              <p
+                className="
+                  mt-5
+                  h-12
+                  text-center
+                  text-sm
+                  leading-6
+                "
+              >
                 {concert.title}
               </p>
-
 
             </button>
 
           ))}
 
-
         </div>
-
-
-
 
         {/* Left Fade */}
 
@@ -232,9 +209,6 @@ export default function ConcertArchive() {
           }}
         />
 
-
-
-
         {/* Right Fade */}
 
         <div
@@ -254,11 +228,7 @@ export default function ConcertArchive() {
           }}
         />
 
-
       </div>
-
-
-
 
       {/* Modal */}
 
@@ -270,7 +240,6 @@ export default function ConcertArchive() {
         />
 
       )}
-
 
     </section>
   );
