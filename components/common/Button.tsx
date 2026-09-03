@@ -5,6 +5,7 @@ type ButtonProps = {
   children: ReactNode;
   href?: string;
   onClick?: () => void;
+  disabled?: boolean;
   target?: "_blank" | "_self";
   rel?: string;
   className?: string;
@@ -14,6 +15,7 @@ export default function Button({
   children,
   href,
   onClick,
+  disabled = false,
   target,
   rel,
   className = "",
@@ -64,6 +66,7 @@ export default function Button({
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       className={buttonClass}
     >
       {children}

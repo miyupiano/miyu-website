@@ -1,6 +1,87 @@
+"use client";
+
+import { useState } from "react";
+import { sendContact } from "@/lib/contact/sendContact";
 import Image from "next/image";
+import Button from "@/components/common/Button";
+
 
 export default function SupportPage() {
+    type FormData = {
+    name: string;
+    email: string;
+    amount: string;
+    schedule: string;
+    message: string;
+  };
+
+  const [step, setStep] = useState<"form" | "complete">("form");
+
+  const [isSending, setIsSending] = useState(false);
+
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    amount: "",
+    schedule: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+  });
+
+  const updateField = (
+    field: keyof FormData,
+    value: string
+  ) => {
+    setFormData({
+      ...formData,
+      [field]: value,
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      email: "",
+    };
+
+    if (!formData.name.trim()) {
+      newErrors.name = "お名前を入力してください";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "メールアドレスを入力してください";
+    }
+
+    else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+    )
+
+    setErrors(newErrors);
+
+    return (
+      !newErrors.name &&
+      !newErrors.email
+    );
+  };
+
+  const sendMail = async () => {
+    setIsSending(true);
+
+    try {
+      await sendContact(formData);
+      setStep("complete");
+    } catch {
+      alert("送信に失敗しました");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+
   return (
     <main>
 
@@ -694,127 +775,150 @@ export default function SupportPage() {
           ご支援をご希望くださる方は、下記フォームよりお申し込みください。お申し込み後、振込先口座をご案内いたします。
         </p>
 
-        <div className="mt-10 md:mt-16 space-y-8">
 
-          <div>
 
-            <label className="mb-2 block text-sm">
-              お名前
-            </label>
+        {step === "form" && (
 
-            <input
-              className="
-                w-full
-                rounded-lg
-                border
-                border-neutral-300
-                p-4
-              "
-            />
+          <div className="mt-10 md:mt-16 space-y-8">
+
+            <div>
+
+              <label className="mb-2 block text-sm">
+                お名前
+              </label>
+
+              <input
+                value={formData.name}
+                onChange={(e) =>
+                  updateField("name", e.target.value)
+                }
+                className="w-full rounded-lg border border-neutral-300 p-4"
+              />
+
+              {errors.name && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.name}
+                </p>
+              )}
+
+              {errors.name && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.name}
+                </p>
+              )}
+
+            </div>
+
+            <div>
+
+              <label className="mb-2 block text-sm">
+                メールアドレス
+              </label>
+
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) =>
+                  updateField("email", e.target.value)
+                }
+                className="w-full rounded-lg border border-neutral-300 p-4"
+              />
+
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.email}
+                </p>
+              )}
+
+            </div>
+
+            <div>
+
+              <label className="mb-2 block text-sm">
+                ご支援金額
+              </label>
+
+              <select
+                value={formData.amount}
+                onChange={(e) =>
+                  updateField("amount", e.target.value)
+                }
+                className="w-full rounded-lg border border-neutral-300 p-4"
+              >
+
+                <option>¥1,000〜</option>
+                <option>¥3,000〜</option>
+                <option>¥5,000〜</option>
+                <option>¥10,000〜</option>
+                <option>その他</option>
+
+              </select>
+
+            </div>
+
+            <div>
+
+              <label className="mb-2 block text-sm">
+                振込予定日（任意）
+              </label>
+
+              <input
+                value={formData.schedule}
+                onChange={(e) =>
+                  updateField("schedule", e.target.value)
+                }
+                placeholder="例：2026年10月頃"
+                className="w-full rounded-lg border border-neutral-300 p-4"
+              />
+
+            </div>
+
+            <div>
+
+              <label className="mb-2 block text-sm">
+                メッセージ（任意）
+              </label>
+
+              <textarea
+                rows={7}
+                value={formData.message}
+                onChange={(e) =>
+                  updateField("message", e.target.value)
+                }
+                className="w-full rounded-lg border border-neutral-300 p-4"
+              />
+
+            </div>
+
+
+            <div className="flex justify-center">
+              <Button
+                onClick={async () => {
+                  if (!validateForm()) return;
+                  await sendMail();
+                }}
+                className="mx-auto"
+              >
+                {isSending ? "送信中..." : "お申し込み"}
+              </Button>
+            </div>          
+          </div>
+        )}
+
+        {step === "complete" && (
+          <div className="py-12 text-center">
+
+            <h2 className="text-3xl font-light">
+              お申し込みありがとうございます
+            </h2>
+
+            <p className="mt-6 leading-8 text-neutral-600">
+              内容を確認のうえ、
+              振込先口座をご案内いたします。
+            </p>
 
           </div>
-
-          <div>
-
-            <label className="mb-2 block text-sm">
-              メールアドレス
-            </label>
-
-            <input
-              type="email"
-              className="
-                w-full
-                rounded-lg
-                border
-                border-neutral-300
-                p-4
-              "
-            />
-
-          </div>
-
-          <div>
-
-            <label className="mb-2 block text-sm">
-              ご支援金額
-            </label>
-
-            <select
-              className="
-                w-full
-                rounded-lg
-                border
-                border-neutral-300
-                p-4
-              "
-            >
-
-              <option>¥1,000〜</option>
-              <option>¥3,000〜</option>
-              <option>¥5,000〜</option>
-              <option>¥10,000〜</option>
-              <option>その他</option>
-
-            </select>
-
-          </div>
-
-          <div>
-
-            <label className="mb-2 block text-sm">
-              振込予定日（任意）
-            </label>
-
-            <input
-              placeholder="例：2026年10月頃"
-              className="
-                w-full
-                rounded-lg
-                border
-                border-neutral-300
-                p-4
-              "
-            />
-
-          </div>
-
-          <div>
-
-            <label className="mb-2 block text-sm">
-              メッセージ（任意）
-            </label>
-
-            <textarea
-              rows={7}
-              className="
-                w-full
-                rounded-lg
-                border
-                border-neutral-300
-                p-4
-              "
-            />
-
-          </div>
-
-          <button
-            className="
-              mx-auto
-              block
-              rounded-full
-              border
-              border-black
-              px-10
-              py-4
-              transition
-              hover:bg-black
-              hover:text-white
-            "
-          >
-            お申し込み
-          </button>
-
-        </div>
+        )}
 
       </section>
 
