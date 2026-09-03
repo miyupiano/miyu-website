@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Button from "@/components/common/Button";
 
 const services = [
   {
@@ -116,7 +117,7 @@ export default function PerformanceRequestPage() {
 
       {/* Availability */}
 
-      <section className="mx-auto max-w-5xl px-8 py-28">
+      <section className="mx-auto max-w-7xl px-8 py-28">
 
         <h2 className="text-4xl font-extralight">
           対応期間・活動拠点
@@ -254,6 +255,39 @@ export default function PerformanceRequestPage() {
             </div>
 
           ))}
+
+        </div>
+
+      </section>
+
+            {/* Contact */}
+
+      <section className="mx-auto max-w-4xl px-8 pb-32">
+
+        <div className="rounded-2xl bg-neutral-50 px-10 py-16 text-center">
+
+          <h2 className="text-3xl font-extralight">
+            お問い合わせ
+          </h2>
+
+          <p className="mt-8 leading-8 text-neutral-700">
+            演奏会やイベント、学校公演などのご依頼は、
+            <br />
+            お問い合わせフォームよりお気軽にご相談ください。
+          </p>
+
+          <p className="mt-4 text-sm leading-7 text-neutral-500">
+            演奏内容や日程、演奏時間、演奏料などにつきましては、
+            ご依頼内容を確認の上、ご案内いたします。
+          </p>
+
+          <div className="mt-10">
+
+            <Button href="/contact/performance">
+              お問い合わせはこちら →
+            </Button>
+
+          </div>
 
         </div>
 

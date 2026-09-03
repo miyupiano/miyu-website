@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Button from "@/components/common/Button";
 
 const services = [
   {
@@ -17,7 +18,10 @@ const services = [
     title: "コンクール・試験伴奏",
     description:
       "コンクールや実技試験、学校の授業などの伴奏を承ります。本番だけでなく、本番前の合わせ（1〜2回程度）にも対応しております。",
-    achievements: ["桐朋学園大学実技試験・洗足学園大学授業内演奏"],
+    achievements: [
+      "桐朋学園大学実技試験",
+      "洗足学園大学授業内演奏",
+    ],
   },
   {
     title: "アマチュア伴奏アドバイス",
@@ -84,13 +88,13 @@ export default function AccompanimentPage() {
 
       {/* Availability */}
 
-      <section className="mx-auto max-w-5xl px-8 py-28">
+      <section className="mx-auto max-w-7xl px-8 py-28">
 
         <h2 className="text-4xl font-extralight">
           対応期間・活動拠点
         </h2>
 
-        <div className="mt-12 space-y-6 leading-9 text-neutral-700">
+        <div className="mt-12 space-y-6 leading-5 text-neutral-700">
 
           <p>
             現在、ベルギー・ブリュッセルを拠点に演奏活動を行っております。
@@ -145,7 +149,7 @@ export default function AccompanimentPage() {
 
         <div
           className="
-            mt-16
+            mt-10
             grid
             gap-8
             md:grid-cols-2
@@ -159,7 +163,6 @@ export default function AccompanimentPage() {
               key={service.title}
               className="
                 flex
-                h-full
                 flex-col
                 rounded-2xl
                 border
@@ -173,19 +176,22 @@ export default function AccompanimentPage() {
                 {service.title}
               </h3>
 
-              <p className="mt-5 leading-8 text-neutral-700">
+              <p className="mt-5
+                flex-1
+                leading-8
+                text-neutral-700">
                 {service.description}
               </p>
 
-              <div className="mt-auto pt-8">
+              <div className="mt-6">
 
-                <div className="border-t border-neutral-200 pt-6">
+                <div className="border-t border-neutral-200 pt-3 h-20">
 
                   <p className="text-xs tracking-[0.15em] text-neutral-400">
                     主な実績
                   </p>
 
-                  <ul className="mt-3 space-y-2 text-sm leading-7 text-neutral-600">
+                  <ul className="mt-3 space-y-1 text-sm leading-5 text-neutral-600">
 
                     {service.achievements.map((achievement) => (
 
@@ -204,6 +210,39 @@ export default function AccompanimentPage() {
             </div>
 
           ))}
+
+        </div>
+
+            </section>
+
+      {/* Contact */}
+
+      <section className="mx-auto max-w-4xl px-8 pb-32">
+
+        <div className="rounded-2xl bg-neutral-50 px-10 py-16 text-center">
+
+          <h2 className="text-3xl font-extralight">
+            お問い合わせ
+          </h2>
+
+          <p className="mt-8 leading-8 text-neutral-700">
+            伴奏や室内楽、レッスン同行、譜めくりなどのご依頼は、
+            <br />
+            お問い合わせフォームよりお気軽にご相談ください。
+          </p>
+
+          <p className="mt-4 text-sm leading-7 text-neutral-500">
+            演奏内容や日程、演奏料などにつきましては、
+            ご依頼内容を確認の上、ご案内いたします。
+          </p>
+
+          <div className="mt-10">
+
+            <Button href="/contact/accompaniment">
+              お問い合わせはこちら →
+            </Button>
+
+          </div>
 
         </div>
 

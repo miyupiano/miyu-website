@@ -68,11 +68,7 @@ export default function PerformancePage() {
 
       <ConcertArchive />
 
-
-
-      {/* Support
-
-      <SupportBanner /> */}
+      <SupportBanner />
 
 
     </main>
